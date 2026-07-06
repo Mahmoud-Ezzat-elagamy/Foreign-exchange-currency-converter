@@ -4,7 +4,7 @@ import { FaStar } from "react-icons/fa";
 function RateAndOptionsBox() {
   const { state } = useCurrency();
   return (
-    <div className="flex items-center gap-4 bg-neutral-800 rounded-b-lg px-5 py-3 text-neutral-100 py-4">
+    <div className="flex items-center gap-4 bg-neutral-800 rounded-b-lg px-5 text-neutral-400 py-4">
       <p>
         1 {state.selectedSendCurrency} = {state.rate}{" "}
         {state.selectedReceiveCurrency}

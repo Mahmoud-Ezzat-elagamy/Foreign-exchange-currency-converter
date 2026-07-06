@@ -18,8 +18,9 @@ const CurrencyContext = createContext();
 const initialState = {
   selectedSendCurrency: "USD",
   selectedSendAmount: 1,
-  selectedReceiveCurrency: "EUR",
-  rate: await getRate("USD", "EUR"),
+  selectedReceiveCurrency: "USD",
+  selectedReceiveAmount: 1.0,
+  rate: 1.0,
 };
 
 function CurrencyProvider({ children }) {

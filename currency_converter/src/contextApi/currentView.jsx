@@ -3,8 +3,9 @@ import { createContext, useContext, useState } from "react";
 const currentViewContext = createContext();
 
 function CurrentViewContextProvider({ children }) {
-  const [selectedView, setSelectedView] = useState("converter");
-  const value = { selectedView, setSelectedView };
+  const [selectedView, setSelectedView] = useState("history");
+  const [timeframe, setTimeFrame] = useState("1D");
+  const value = { selectedView, setSelectedView, timeframe, setTimeFrame };
   return (
     <currentViewContext.Provider value={value}>
       {children}
@@ -12,7 +13,7 @@ function CurrentViewContextProvider({ children }) {
   );
 }
 
-function ViewContext() {
+function useViewContext() {
   const context = useContext(currentViewContext);
   if (!context) {
     throw new Error(
@@ -23,4 +24,4 @@ function ViewContext() {
 }
 
 export default CurrentViewContextProvider;
-export { ViewContext };
+export { useViewContext };
