@@ -11,7 +11,7 @@ function ValueBox({ direction }) {
   return (
     <div className="bg-neutral-700 rounded-2xl p-5">
       <p className="uppercase text-neutral-100 tracking-[1px]">{text}</p>
-      <div className="flex items-center justify-between">
+      <div className="flex items-end justify-between">
         <input
           value={
             direction === "send"
