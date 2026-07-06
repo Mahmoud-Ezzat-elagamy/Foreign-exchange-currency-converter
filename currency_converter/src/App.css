@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/fonts/jetbrains-mono/jetbrains-mono-variable.ttf")
+    format("truetype");
+  font-weight: 100 800;
+  font-style: normal;
+}
+
+::root {
+  --dark-bg: #0a0a0a;
+}
+
+body {
+  font-family: "JetBrains Mono", monospace !important;
+  @apply bg-neutral-900;
+}
+
+.slider {
+  display: flex;
+  flex-wrap: nowrap;
+  animation: scroll 28s linear infinite;
+}
+
+.slider:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
