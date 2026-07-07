@@ -1,12 +1,12 @@
 import { useViewContext } from "../contextApi/currentView";
 
 const timeSpans = [
-  { label: "1 Day", value: "1d" },
-  { label: "1 Week", value: "1w" },
-  { label: "1 Month", value: "1m" },
-  { label: "3 Months", value: "3m" },
-  { label: "1 Year", value: "1y" },
-  { label: "5 Years", value: "5y" },
+  { label: "1 Day", value: "1D" },
+  { label: "1 Week", value: "1W" },
+  { label: "1 Month", value: "1M" },
+  { label: "3 Months", value: "3M" },
+  { label: "1 Year", value: "1Y" },
+  { label: "5 Years", value: "5Y" },
 ];
 
 function TimeSpan() {

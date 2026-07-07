@@ -6,7 +6,7 @@ import TimeSpan from "./TimeSpan";
 function HistoryView() {
   return (
     <>
-      <div className="flex lg:flex-row flex-col gap-3 justify-between lg:items-center items-start mt-4">
+      <div className="flex lg:flex-row flex-col gap-3 justify-between lg:items-center items-start">
         <Statistics />
         <TimeSpan />
       </div>

@@ -3,7 +3,8 @@ import { useCurrency } from "../contextApi/concurrs";
 function GraphTitle() {
   const { state } = useCurrency();
   const date = new Date().toUTCString();
-  console.log(date);
+  // console.log(date);
+
   return (
     <div className="flex justify-between items-center mb-4 flex-wrap">
       <p className="text-lg font-semibold text-neutral-200">

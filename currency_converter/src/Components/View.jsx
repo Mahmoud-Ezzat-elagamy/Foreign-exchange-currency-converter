@@ -1,16 +1,21 @@
 import { useViewContext } from "../contextApi/currentView";
 import Choises from "./Choises";
+import CompareView from "./CompareView";
+import FavoritesView from "./FavoritesView";
 import HistoryView from "./HistoryView";
+import LogView from "./LogView";
 
 function View() {
   const { selectedView } = useViewContext();
   return (
-    <section className="max-w-340 mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="max-w-340 mx-auto px-4 sm:px-6 lg:px-8 pb-8">
       <Choises />
-      {selectedView === "history" && <HistoryView />}
-      {selectedView === "compare" && <div>Compare View</div>}
-      {selectedView === "favorites" && <div>Favorites View</div>}
-      {selectedView === "log" && <div>Log View</div>}
+      <div className="p-5 bg-neutral-800 rounded-xl mt-6">
+        {selectedView === "history" && <HistoryView />}
+        {selectedView === "compare" && <CompareView />}
+        {selectedView === "favorites" && <FavoritesView />}
+        {selectedView === "log" && <LogView />}
+      </div>
     </section>
   );
 }

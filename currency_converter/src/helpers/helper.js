@@ -1,3 +1,5 @@
+import { validCurrencies } from "../../public/data";
+
 export async function getRate(fromCurrency, toCurrency) {
   const res = await fetch(
     `https://api.frankfurter.dev/v2/rates?base=${fromCurrency}&quotes=${toCurrency}`,
@@ -20,9 +22,9 @@ export async function getRatesForTimeFrame(
     new Date(Date.now() - dayseconds * timeframe).toLocaleDateString(),
   );
 
-  console.log(
-    `https://api.frankfurter.dev/v2/rates?from=${startDate}&to=${today}&quotes=${toCurrency}&base=${fromCurrency}`,
-  );
+  // console.log(
+  //   `https://api.frankfurter.dev/v2/rates?from=${startDate}&to=${today}&quotes=${toCurrency}&base=${fromCurrency}`,
+  // );
 
   const res = await fetch(
     `https://api.frankfurter.dev/v2/rates?from=${startDate}&to=${today}&quotes=${toCurrency}&base=${fromCurrency}`,
@@ -36,4 +38,33 @@ export async function getRatesForTimeFrame(
 function getDateFormated(date) {
   const [month, day, year] = date.split("/");
   return `${year}-${month}-${day}`;
+}
+
+export async function getRatesForCurrency(currency) {
+  const res = await fetch(
+    `https://api.frankfurter.dev/v2/rates?base=${currency}&quotes=${validCurrencies.join(",")}`,
+  );
+  if (!res.ok) {
+    throw new Error("Failed to fetch exchange rates for currency");
+  }
+  return await res.json();
+}
+
+export async function getYesterdayRate(fromCurrency, toCurrency) {
+  const dayseconds = 24 * 60 * 60 * 1000;
+  const yesterday = getDateFormated(
+    new Date(Date.now() - dayseconds).toLocaleDateString(),
+  );
+
+  const res = await fetch(
+    `https://api.frankfurter.dev/v2/rates?date=${yesterday}&base=${fromCurrency}&quotes=${toCurrency}`,
+  );
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch yesterday's exchange rate");
+  }
+
+  const [data] = await res.json();
+
+  return data.rate;
 }

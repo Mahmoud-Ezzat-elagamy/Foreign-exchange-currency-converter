@@ -9,15 +9,38 @@ const timeFrames = {
   "1D": "1",
   "1W": "7",
   "1M": "30",
-  "6M": "180",
+  "3M": "90",
   "1Y": "365",
+  "5Y": "1825",
+};
+
+const gradient = (context) => {
+  const chart = context.chart;
+  const { ctx, chartArea } = chart;
+
+  if (!chartArea) {
+    return "rgba(206, 247, 57, 0.2)";
+  }
+
+  const gradient = ctx.createLinearGradient(
+    0,
+    chartArea.top,
+    0,
+    chartArea.bottom,
+  );
+
+  gradient.addColorStop(0, "rgba(206, 247, 57, 0.5)");
+  gradient.addColorStop(1, "rgba(206, 247, 57, 0)");
+
+  return gradient;
 };
 
 function Graph() {
   const [data, setData] = useState(null);
   const { state } = useCurrency();
-  const { timeframe } = useViewContext();
+  const { timeframe, setStart, setEnd } = useViewContext();
   const { selectedSendCurrency, selectedReceiveCurrency } = state;
+
   useEffect(() => {
     async function fetchData() {
       const data = await getRatesForTimeFrame(
@@ -29,27 +52,38 @@ function Graph() {
     }
     fetchData();
   }, [selectedSendCurrency, selectedReceiveCurrency, timeframe]);
-  console.log(data);
+
+  const labels = data ? data.map((item) => item.date) : [];
+  const rates = data ? data.map((item) => item.rate) : [];
+  setStart(data?.[0]);
+  setEnd(data?.[data.length - 1]);
+
   return (
     <div>
-      {/* <Line
+      <Line
         datasetIdKey="id"
         data={{
-          labels: ["Jun", "Jul", "Aug"],
+          labels: labels,
           datasets: [
             {
               id: 1,
               label: "",
-              data: [5, 6, 7],
-            },
-            {
-              id: 2,
-              label: "",
-              data: [3, 2, 1],
+              data: rates,
+              borderColor: "#CEF739",
+              fill: true,
+              backgroundColor: gradient,
+              pointRadius: 0,
             },
           ],
         }}
-      /> */}
+        options={{
+          plugins: {
+            legend: {
+              display: false,
+            },
+          },
+        }}
+      />
     </div>
   );
 }

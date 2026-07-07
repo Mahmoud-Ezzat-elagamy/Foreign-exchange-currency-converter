@@ -22,15 +22,19 @@ export default function reducer(state, action) {
     case "SET_RECEIVE_AMOUNT":
       return {
         ...state,
-        selectedReceiveAmount: (state.selectedSendAmount * state.rate).toFixed(
-          2,
-        ),
+        selectedReceiveAmount: action.payload,
       };
     case "SWAP_CURRENCIES":
       return {
         ...state,
         selectedSendCurrency: state.selectedReceiveCurrency,
         selectedReceiveCurrency: state.selectedSendCurrency,
+      };
+
+    case "SET_RATE":
+      return {
+        ...state,
+        rate: action.payload,
       };
     default:
       return state;
@@ -58,9 +62,10 @@ function setReceiveCurrency(currency, rate) {
   };
 }
 
-function setReceiveAmount() {
+function setReceiveAmount(amount) {
   return {
     type: "SET_RECEIVE_AMOUNT",
+    payload: amount,
   };
 }
 
@@ -70,10 +75,18 @@ function swapCurrencies() {
   };
 }
 
+function setRate(rate) {
+  return {
+    type: "SET_RATE",
+    payload: rate,
+  };
+}
+
 export {
   setSendCurrency,
   setSendAmount,
   setReceiveCurrency,
   setReceiveAmount,
   swapCurrencies,
+  setRate,
 };

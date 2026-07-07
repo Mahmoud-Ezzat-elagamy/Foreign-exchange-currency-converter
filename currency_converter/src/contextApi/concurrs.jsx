@@ -17,7 +17,7 @@ import { getRate } from "../helpers/helper";
 const CurrencyContext = createContext();
 const initialState = {
   selectedSendCurrency: "USD",
-  selectedSendAmount: 1,
+  selectedSendAmount: 1.0,
   selectedReceiveCurrency: "USD",
   selectedReceiveAmount: 1.0,
   rate: 1.0,
@@ -52,7 +52,7 @@ function CurrencyProvider({ children }) {
 
   function handleChangeSendAmount(amount) {
     dispatch(setSendAmount(amount));
-    dispatch(setReceiveAmount());
+    dispatch(setReceiveAmount(amount * state.rate));
   }
 
   // get the random slider items from the api and store them in the state
