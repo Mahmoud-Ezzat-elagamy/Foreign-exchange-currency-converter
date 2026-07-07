@@ -1,9 +1,5 @@
-import SelectCurrency from "./SelectCurrency";
 import { useCurrency } from "../contextApi/concurrs";
-import {
-  setSendAmount,
-  setReceiveAmount,
-} from "../contextApi/contextReducer.js";
+import SelectCurrency from "./SelectCurrency";
 
 function ValueBox({ direction }) {
   const text = direction === "send" ? "Send" : "Receive";
