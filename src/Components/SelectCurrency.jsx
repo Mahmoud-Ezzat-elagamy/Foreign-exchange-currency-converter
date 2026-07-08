@@ -2,20 +2,41 @@ import { useEffect, useRef, useState } from "react";
 import { FaCaretDown, FaCheck } from "react-icons/fa";
 import { useCurrency } from "../contextApi/concurrs";
 import { validCurrencies } from "../../public/data";
+import { useViewContext } from "../contextApi/currentView";
+import CurrencyItem from "./CurrencyItem";
 
 const flageTemplate = (code) => `/flags/${code.toLowerCase()}.webp`;
 
 function SelectCurrency({ direction }) {
+  const { logViewData } = useViewContext();
   const [isOpen, setIsOpen] = useState(false);
   const { changeSendCurrency, changeReceiveCurrency, state } = useCurrency();
   const ref = useRef(null);
   const [searchCurrency, setSearchCurrency] = useState(null);
 
-  const filteredCurrencies = searchCurrency
-    ? validCurrencies.filter((currency) =>
-        currency.toLowerCase().includes(searchCurrency.toLowerCase()),
-      )
-    : validCurrencies;
+  const recentlyUsedCurrencies = logViewData
+    .slice(-3)
+    .reduce((acc, logItem) => {
+      const send = logItem.sendCurrency;
+      const receive = logItem.receiveCurrency;
+      if (!acc.includes(send)) {
+        acc.push(send);
+      }
+      if (!acc.includes(receive)) {
+        acc.push(receive);
+      }
+      return acc;
+    }, [])
+    .slice(-4); // Get the last 4 unique currencies
+  console.log(recentlyUsedCurrencies);
+
+  const filteredCurrencies = (
+    searchCurrency
+      ? validCurrencies.filter((currency) =>
+          currency.toLowerCase().includes(searchCurrency.toLowerCase()),
+        )
+      : validCurrencies
+  ).filter((currency) => !recentlyUsedCurrencies.includes(currency));
 
   function toggleDropdown() {
     setIsOpen((isOpen) => !isOpen);
@@ -31,8 +52,6 @@ function SelectCurrency({ direction }) {
 
   useEffect(() => {
     function handleClickOutside(event) {
-      console.log("ref.current:", ref.current);
-      console.log("event.target:", event.target);
       if (ref.current && !ref.current.contains(event.target)) {
         setIsOpen(false);
       }
@@ -86,40 +105,38 @@ function SelectCurrency({ direction }) {
               onChange={(e) => setSearchCurrency(e.target.value.toUpperCase())}
             />
           </div>
-          <div className="max-h-80 overflow-auto p-2">
-            {filteredCurrencies.map((currency) => (
-              <button
-                key={currency}
-                type="button"
-                className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-left transition hover:bg-white/5"
-                onClick={(e) => handleCurrencySelect(currency, e)}
-              >
-                <div className="h-8 w-8 overflow-hidden rounded-full bg-white ring-1 ring-white/10">
-                  <img
-                    src={flageTemplate(currency)}
-                    alt={currency}
-                    className="h-full w-full object-cover"
+          <div>
+            {recentlyUsedCurrencies.length > 0 && (
+              <div className="border-b border-white/10 px-4 py-3 text-[12px] uppercase tracking-[0.4em] text-neutral-500">
+                <h2 className="tracking-[3px] text-[15px] text-neutral-500 uppercase">
+                  Recently used
+                </h2>
+                {recentlyUsedCurrencies.map((currency) => (
+                  <CurrencyItem
+                    currency={currency}
+                    direction={direction}
+                    handleCurrencySelect={handleCurrencySelect}
+                    state={state}
+                    key={currency}
                   />
-                </div>
-
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center justify-between gap-3">
-                    <span className="text-sm font-semibold tracking-[0.18em] text-neutral-100">
-                      {currency.toUpperCase()}
-                    </span>
-                    {currency ==
-                    (direction === "send"
-                      ? state.selectedSendCurrency
-                      : state.selectedReceiveCurrency) ? (
-                      <FaCheck className="shrink-0 text-lime-500" />
-                    ) : null}
-                  </div>
-                  <p className="truncate text-xs text-neutral-400">
-                    {currency.name}
-                  </p>
-                </div>
-              </button>
-            ))}
+                ))}
+              </div>
+            )}
+          </div>
+          <div className="max-h-80 overflow-auto p-2">
+            {filteredCurrencies.length > 0 ? (
+              filteredCurrencies?.map((currency) => (
+                <CurrencyItem
+                  currency={currency}
+                  direction={direction}
+                  handleCurrencySelect={handleCurrencySelect}
+                  state={state}
+                  key={currency}
+                />
+              ))
+            ) : (
+              <p className="px-4 py-3 text-neutral-500">No currencies found</p>
+            )}
           </div>
         </div>
       )}

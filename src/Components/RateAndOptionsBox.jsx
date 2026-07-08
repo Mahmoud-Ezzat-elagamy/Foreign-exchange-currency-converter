@@ -8,7 +8,7 @@ function RateAndOptionsBox() {
     favorites,
     addToFavorites,
     removeFromFavorites,
-    logViewDate,
+    logViewData,
     addToLog,
     removeFromLog,
   } = useViewContext();
@@ -23,7 +23,7 @@ function RateAndOptionsBox() {
   const fromTo = `${selectedSendCurrency}/${selectedReceiveCurrency}`;
   const isFavorite = favorites.some((fav) => fav.fromTo === fromTo); // true if the pair is already in favorites, false otherwise
   const logIndex = `${selectedSendCurrency}/${selectedReceiveCurrency}/${selectedSendAmount}/${selectedReceiveAmount}`;
-  const isLogged = logViewDate.some((log) => log.logIndex === logIndex); // true if the conversion is already logged, false otherwise
+  const isLogged = logViewData.some((log) => log.logIndex === logIndex); // true if the conversion is already logged, false otherwise
 
   // add to favorites function
   function handleClickOnFavorite() {

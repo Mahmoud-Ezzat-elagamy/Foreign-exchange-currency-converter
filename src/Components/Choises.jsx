@@ -3,7 +3,7 @@ import { useViewContext } from "../contextApi/currentView";
 const choises = ["history", "compare", "favorites", "log"];
 
 function Choises() {
-  const { selectedView, setSelectedView, favorites, logViewDate } =
+  const { selectedView, setSelectedView, favorites, logViewData } =
     useViewContext();
   return (
     <ul className="flex items-center justify-start w-full border-b border-neutral-600 ">
@@ -25,9 +25,9 @@ function Choises() {
               {favorites.length}
             </span>
           )}
-          {choice === "log" && logViewDate.length > 0 && (
+          {choice === "log" && logViewData.length > 0 && (
             <span className="ml-2 flex h-5 w-5 items-center justify-center rounded-full border border-lime-900 bg-lime-500 text-[11px] font-bold text-lime-900 sm:text-xs">
-              {logViewDate.length}
+              {logViewData.length}
             </span>
           )}
         </li>

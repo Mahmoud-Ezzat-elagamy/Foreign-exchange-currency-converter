@@ -2,8 +2,8 @@ import { useViewContext } from "../contextApi/currentView";
 import LogItem from "./LogItem";
 
 function LogView() {
-  const { logViewDate = [], setLogViewDate } = useViewContext();
-  const logs = logViewDate.filter((log) => log.logIndex);
+  const { logViewData = [], setLogViewData } = useViewContext();
+  const logs = logViewData.filter((log) => log.logIndex);
 
   return (
     <div>
@@ -18,7 +18,7 @@ function LogView() {
 
         <button
           className="rounded-md border border-neutral-600 bg-neutral-700/50 px-3 py-2 text-sm uppercase cursor-pointer transition-colors text-neutral-400 hover:bg-neutral-600 disabled:cursor-not-allowed disabled:opacity-40"
-          onClick={() => setLogViewDate([])}
+          onClick={() => setLogViewData([])}
           disabled={logs.length === 0}
         >
           Clear all

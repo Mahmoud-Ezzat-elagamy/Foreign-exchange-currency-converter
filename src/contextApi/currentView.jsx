@@ -6,7 +6,7 @@ function CurrentViewContextProvider({ children }) {
   const favoritesFromLocalStorage =
     JSON.parse(localStorage.getItem("favorites")) || [];
   const logViewDateFromLocalStorage =
-    JSON.parse(localStorage.getItem("logViewDate")) || [];
+    JSON.parse(localStorage.getItem("logViewData")) || [];
 
   const [selectedView, setSelectedView] = useState("history");
   const [timeframe, setTimeFrame] = useState("1D");
@@ -14,7 +14,7 @@ function CurrentViewContextProvider({ children }) {
   const [end, setEnd] = useState(null);
   const [compareViewData, setCompareViewData] = useState(null);
   const [favorites, setFavorites] = useState(favoritesFromLocalStorage);
-  const [logViewDate, setLogViewDate] = useState(logViewDateFromLocalStorage);
+  const [logViewData, setLogViewData] = useState(logViewDateFromLocalStorage);
 
   const value = {
     selectedView,
@@ -31,8 +31,8 @@ function CurrentViewContextProvider({ children }) {
     setFavorites,
     addToFavorites,
     removeFromFavorites,
-    logViewDate,
-    setLogViewDate,
+    logViewData,
+    setLogViewData,
     addToLog,
     removeFromLog,
   };
@@ -52,17 +52,17 @@ function CurrentViewContextProvider({ children }) {
   }
 
   function addToLog(newLog) {
-    const updatedLogViewDate = [...logViewDate, newLog];
-    setLogViewDate(updatedLogViewDate);
-    localStorage.setItem("logViewDate", JSON.stringify(updatedLogViewDate));
+    const updatedLogViewData = [...logViewData, newLog];
+    setLogViewData(updatedLogViewData);
+    localStorage.setItem("logViewData", JSON.stringify(updatedLogViewData));
   }
 
   function removeFromLog(index) {
-    const updatedLogViewDate = logViewDate.filter(
+    const updatedLogViewData = logViewData.filter(
       (log) => log.logIndex !== index,
     );
-    setLogViewDate(updatedLogViewDate);
-    localStorage.setItem("logViewDate", JSON.stringify(updatedLogViewDate));
+    setLogViewData(updatedLogViewData);
+    localStorage.setItem("logViewData", JSON.stringify(updatedLogViewData));
   }
 
   return (
