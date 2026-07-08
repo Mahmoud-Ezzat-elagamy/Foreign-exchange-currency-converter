@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { FaCaretDown, FaCheck } from "react-icons/fa";
+import { FaCaretDown } from "react-icons/fa";
 import { useCurrency } from "../contextApi/concurrs";
 import { validCurrencies } from "../../public/data";
 import { useViewContext } from "../contextApi/currentView";
@@ -73,7 +73,7 @@ function SelectCurrency({ direction }) {
     <div className="relative" ref={ref}>
       <button
         type="button"
-        onClick={() => setIsOpen((open) => !open)}
+        onClick={toggleDropdown}
         aria-expanded={isOpen}
         aria-haspopup="listbox"
         aria-controls="currency-menu"
@@ -106,8 +106,18 @@ function SelectCurrency({ direction }) {
             Select currency
           </div>
 
+          <div className="px-4 py-3">
+            <input
+              type="text"
+              placeholder="Search currency..."
+              className="mt-2 w-full rounded-lg border border-white/10 bg-transparent px-3 py-2 text-neutral-100 placeholder:text-neutral-500 focus:outline-none"
+              value={searchCurrency || ""}
+              onChange={(e) => setSearchCurrency(e.target.value.toUpperCase())}
+            />
+          </div>
+
           <div className="max-h-80 overflow-auto p-2">
-            {recentlyUsedCurrencies.length > 0 && (
+            {recentlyUsedCurrencies.length > 0 && !searchCurrency && (
               <div className="border-b border-white/10 px-4 py-3 text-[12px] uppercase tracking-[0.4em] text-neutral-500">
                 <h2 className="tracking-[3px] text-[15px] text-neutral-500 uppercase">
                   Recently used
