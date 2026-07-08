@@ -6,7 +6,7 @@ function Slider() {
 
   return (
     <div className="flex items-center overflow-hidden">
-      <div className="flex shrink-0 gap-2 bg-lime-500 px-4 py-3 uppercase text-neutral-900 z-50">
+      <div className="flex shrink-0 gap-2 bg-lime-500 px-2 py-1.5 uppercase text-neutral-900 z-50">
         <span
           className="h-2 w-2 rounded-full bg-neutral-900 translate-y-2.25"
           aria-hidden="true"

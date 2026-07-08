@@ -4,7 +4,7 @@ import RateAndOptionsBox from "./RateAndOptionsBox";
 
 function Main() {
   return (
-    <main className="py-12 px-8 max-w-340 mx-auto">
+    <main className="pt-8 pb-2 px-8 max-w-310 mx-auto">
       <MainHeader />
       <ConverterBox />
       <RateAndOptionsBox />

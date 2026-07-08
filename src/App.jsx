@@ -9,10 +9,12 @@ function App() {
   return (
     <CurrencyProvider>
       <CurrentViewContextProvider>
-        <Header />
-        <Slider />
-        <Main />
-        <View />
+        <div>
+          <Header />
+          <Slider />
+          <Main />
+          <View />
+        </div>
       </CurrentViewContextProvider>
     </CurrencyProvider>
   );

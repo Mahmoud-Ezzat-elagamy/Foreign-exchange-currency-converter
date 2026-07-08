@@ -58,7 +58,7 @@ function RateAndOptionsBox() {
   }
 
   return (
-    <div className="flex flex-col md:flex-row md:items-center gap-4 bg-neutral-800 rounded-b-lg px-5 text-neutral-400 py-4">
+    <div className="flex flex-col md:flex-row md:items-center gap-4 bg-neutral-800 rounded-b-lg px-4 text-neutral-400 py-2.5">
       <p>
         1 {state.selectedSendCurrency} = {state.rate}{" "}
         {state.selectedReceiveCurrency}
@@ -66,7 +66,7 @@ function RateAndOptionsBox() {
 
       <div className="md:ml-auto flex gap-3 ">
         <button
-          className="flex items-center gap-2 rounded-md px-4 py-2  transition hover:bg-neutral-600 bg-lime-500 text-neutral-900 cursor-pointer"
+          className="flex items-center gap-2 rounded-md px-2 py-1  transition hover:bg-neutral-600 bg-lime-500 text-neutral-900 cursor-pointer"
           onClick={handleClickOnFavorite}
         >
           {isFavorite ? <FaStar /> : ""}
@@ -75,7 +75,7 @@ function RateAndOptionsBox() {
           </span>
         </button>
         <button
-          className="uppercase tracking-wider px-4 py-2 transition hover:bg-lime-600/15 border border-lime-500 rounded-md cursor-pointer"
+          className="uppercase tracking-wider px-2 py-1 transition hover:bg-lime-600/15 border border-lime-500 rounded-md cursor-pointer"
           onClick={handleClickOnLog}
         >
           {isLogged ? "Logged" : "log conversion"}

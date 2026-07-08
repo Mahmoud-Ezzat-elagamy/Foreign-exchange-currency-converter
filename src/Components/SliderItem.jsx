@@ -2,7 +2,7 @@ import { FaCaretUp } from "react-icons/fa";
 
 function SliderItem({ item }) {
   return (
-    <div className="flex items-center gap-2.5 px-5 py-3 bg-neutral-800 border-r border-neutral-500">
+    <div className="flex items-center gap-2.5 px-3 py-1.5 bg-neutral-800 border-r border-neutral-500">
       <span className="uppercase text-neutral-200">
         {item.sendCurrency}/{item.receiveCurrency}
       </span>

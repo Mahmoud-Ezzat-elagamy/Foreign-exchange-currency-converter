@@ -65,7 +65,7 @@ function Graph() {
   const rates = data ? data.map((item) => item.rate) : [];
 
   return (
-    <div>
+    <div className="w-full h-75 md:h-100 lg:h-100">
       <Line
         datasetIdKey="id"
         data={{
@@ -83,6 +83,8 @@ function Graph() {
           ],
         }}
         options={{
+          responsive: true,
+          maintainAspectRatio: false,
           plugins: {
             legend: {
               display: false,
