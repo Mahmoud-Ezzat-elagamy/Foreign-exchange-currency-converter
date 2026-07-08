@@ -1,7 +1,6 @@
 import { FaCaretUp } from "react-icons/fa";
 
 function StatisticsItemBox({ text, value }) {
-  console.log(text, value);
   return (
     <div className="bg-neutral-700/50 px-4 py-3 rounded-lg flex flex-col gap-2">
       <p className="text-xs uppercase tracking-wide scale-x-[1.1] text-neutral-400 sm:text-sm">

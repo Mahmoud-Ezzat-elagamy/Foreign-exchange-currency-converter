@@ -23,7 +23,7 @@ function CurrencyItem({ currency, handleCurrencySelect, direction, state }) {
           <span className="text-sm font-semibold tracking-[0.18em] text-neutral-100">
             {currency.toUpperCase()}
           </span>
-          {currency ==
+          {currency ===
           (direction === "send"
             ? state.selectedSendCurrency
             : state.selectedReceiveCurrency) ? (

@@ -49,14 +49,20 @@ function Graph() {
         timeFrames[timeframe],
       );
       setData(data);
+      setStart(data?.[0]);
+      setEnd(data?.[data.length - 1]);
     }
     fetchData();
-  }, [selectedSendCurrency, selectedReceiveCurrency, timeframe]);
+  }, [
+    selectedSendCurrency,
+    selectedReceiveCurrency,
+    timeframe,
+    setStart,
+    setEnd,
+  ]);
 
   const labels = data ? data.map((item) => item.date) : [];
   const rates = data ? data.map((item) => item.rate) : [];
-  setStart(data?.[0]);
-  setEnd(data?.[data.length - 1]);
 
   return (
     <div>

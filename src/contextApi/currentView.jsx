@@ -1,20 +1,32 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 const currentViewContext = createContext();
 
 function CurrentViewContextProvider({ children }) {
-  const favoritesFromLocalStorage =
-    JSON.parse(localStorage.getItem("favorites")) || [];
-  const logViewDateFromLocalStorage =
-    JSON.parse(localStorage.getItem("logViewData")) || [];
-
   const [selectedView, setSelectedView] = useState("history");
   const [timeframe, setTimeFrame] = useState("1D");
   const [start, setStart] = useState(null);
   const [end, setEnd] = useState(null);
   const [compareViewData, setCompareViewData] = useState(null);
-  const [favorites, setFavorites] = useState(favoritesFromLocalStorage);
-  const [logViewData, setLogViewData] = useState(logViewDateFromLocalStorage);
+  const [favorites, setFavorites] = useState([]);
+  const [logViewData, setLogViewData] = useState([]);
+
+  useEffect(() => {
+    try {
+      const savedFavorites =
+        JSON.parse(localStorage.getItem("favorites")) || [];
+      setFavorites(savedFavorites);
+    } catch {
+      setFavorites([]);
+    }
+    try {
+      const savedLogViewData =
+        JSON.parse(localStorage.getItem("logViewData")) || [];
+      setLogViewData(savedLogViewData);
+    } catch {
+      setLogViewData([]);
+    }
+  }, []);
 
   const value = {
     selectedView,

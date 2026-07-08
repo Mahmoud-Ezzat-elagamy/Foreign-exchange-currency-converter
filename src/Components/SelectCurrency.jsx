@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { FaCaretDown } from "react-icons/fa";
+import { FaCaretDown, FaCheck } from "react-icons/fa";
 import { useCurrency } from "../contextApi/concurrs";
 import { validCurrencies } from "../../public/data";
 import { useViewContext } from "../contextApi/currentView";
@@ -28,7 +28,6 @@ function SelectCurrency({ direction }) {
       return acc;
     }, [])
     .slice(-4); // Get the last 4 unique currencies
-  console.log(recentlyUsedCurrencies);
 
   const filteredCurrencies = (
     searchCurrency
@@ -67,45 +66,33 @@ function SelectCurrency({ direction }) {
 
   return (
     <div className="relative" ref={ref}>
-      <div
-        onClick={toggleDropdown}
-        className="flex items-center gap-3 rounded-2xl border border-white/10 bg-neutral-800/90 px-3 py-2 text-neutral-100 shadow-[0_10px_30px_rgba(0,0,0,0.35)] transition duration-200 hover:border-lime-500/40 hover:bg-neutral-800 cursor-pointer"
+      <button
+        type="button"
+        onClick={() => setIsOpen((open) => !open)}
+        aria-expanded={isOpen}
+        aria-haspopup="listbox"
+        aria-controls="currency-menu"
+        className="flex items-center gap-3 rounded-2xl border border-white/10 bg-neutral-800/90 px-3 py-2 text-neutral-100 shadow-[0_10px_30px_rgba(0,0,0,0.35)] transition duration-200 hover:border-lime-500/40 hover:bg-neutral-800 cursor-pointer focus:outline-none focus:ring-2 focus:ring-lime-500"
       >
-        <div className="h-6 w-6 overflow-hidden rounded-full bg-white ring-1 ring-white/10">
-          <img
-            src={
-              direction === "send"
-                ? flageTemplate(state.selectedSendCurrency)
-                : flageTemplate(state.selectedReceiveCurrency)
-            }
-            alt={`${direction === "send" ? state.selectedSendCurrency : state.selectedReceiveCurrency} flag`}
-            className="h-full w-full object-cover"
-          />
-        </div>
-        <div className="flex flex-col leading-none text-left">
-          <span className=" font-medium tracking-[0.18em]">
-            {direction === "send"
-              ? state.selectedSendCurrency
-              : state.selectedReceiveCurrency}
-          </span>
-        </div>
+        <span>
+          {direction === "send"
+            ? state.selectedSendCurrency
+            : state.selectedReceiveCurrency}
+        </span>
         <FaCaretDown className="ml-1 text-neutral-400" />
-      </div>
+      </button>
+
       {isOpen && (
-        <div className="absolute right-0 top-full z-10 mt-2 w-80 overflow-hidden rounded-2xl border border-white/10 bg-neutral-900 shadow-[0_20px_60px_rgba(0,0,0,0.45)]">
+        <div
+          id="currency-menu"
+          role="listbox"
+          className="absolute right-0 top-full z-10 mt-2 w-80 overflow-hidden rounded-2xl border border-white/10 bg-neutral-900 shadow-[0_20px_60px_rgba(0,0,0,0.45)]"
+        >
           <div className="border-b border-white/10 px-4 py-3 text-[12px] uppercase tracking-[0.4em] text-neutral-500">
             Select currency
           </div>
-          <div className="px-4 py-3">
-            <input
-              type="text"
-              placeholder="Search currency..."
-              className="bg-transparent text-neutral-100 placeholder:text-neutral-500 focus:outline-none px-3 py-2 w-full border border-white/10 rounded-lg mt-2"
-              value={searchCurrency || ""}
-              onChange={(e) => setSearchCurrency(e.target.value.toUpperCase())}
-            />
-          </div>
-          <div>
+
+          <div className="max-h-80 overflow-auto p-2">
             {recentlyUsedCurrencies.length > 0 && (
               <div className="border-b border-white/10 px-4 py-3 text-[12px] uppercase tracking-[0.4em] text-neutral-500">
                 <h2 className="tracking-[3px] text-[15px] text-neutral-500 uppercase">
@@ -122,8 +109,6 @@ function SelectCurrency({ direction }) {
                 ))}
               </div>
             )}
-          </div>
-          <div className="max-h-80 overflow-auto p-2">
             {filteredCurrencies.length > 0 ? (
               filteredCurrencies?.map((currency) => (
                 <CurrencyItem
