@@ -38,18 +38,6 @@ http://localhost:5173
 - `npm run preview` previews the production build locally.
 - `npm run lint` checks the project with ESLint.
 
-## Accessibility notes
-
-The app already has a strong visual structure, but a few areas can be improved further:
-
-- Replace clickable `div` and `li` elements with real `button` elements where users interact with the UI.
-- Add keyboard support for the currency dropdown and the view selector so they work with Tab, Enter, and Escape.
-- Add ARIA attributes such as `aria-expanded`, `aria-controls`, and `role="tablist"` where appropriate.
-- Make sure every icon-only action has an accessible label.
-- Check text and background color contrast in smaller helper text and badges.
-- Ensure focus states are visible on all interactive elements.
-- Close the currency menu on outside click and on Escape to match expected keyboard behavior.
-
 ## Project structure
 
 - `src/Components` contains the main UI pieces.
