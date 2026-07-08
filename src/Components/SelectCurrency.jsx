@@ -64,6 +64,11 @@ function SelectCurrency({ direction }) {
     };
   }, []);
 
+  const imageSrc =
+    direction === "send"
+      ? flageTemplate(state.selectedSendCurrency)
+      : flageTemplate(state.selectedReceiveCurrency);
+
   return (
     <div className="relative" ref={ref}>
       <button
@@ -74,6 +79,15 @@ function SelectCurrency({ direction }) {
         aria-controls="currency-menu"
         className="flex items-center gap-3 rounded-2xl border border-white/10 bg-neutral-800/90 px-3 py-2 text-neutral-100 shadow-[0_10px_30px_rgba(0,0,0,0.35)] transition duration-200 hover:border-lime-500/40 hover:bg-neutral-800 cursor-pointer focus:outline-none focus:ring-2 focus:ring-lime-500"
       >
+        <img
+          src={imageSrc}
+          alt={
+            direction === "send"
+              ? state.selectedSendCurrency
+              : state.selectedReceiveCurrency
+          }
+          className="h-5 w-5 rounded-full object-cover"
+        />
         <span>
           {direction === "send"
             ? state.selectedSendCurrency
