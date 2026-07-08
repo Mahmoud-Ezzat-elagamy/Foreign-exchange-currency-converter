@@ -11,7 +11,7 @@ function Choises() {
         <li
           key={index}
           className={
-            `px-4 py-3 border-b  hover:border-lime-500 cursor-pointer uppercase text-xl text-neutral-200 transition-all duration-300 tracking-wider translate-y-px flex gap-1 ` +
+            `flex gap-1 border-b px-4 py-3 text-base uppercase tracking-wider translate-y-px text-neutral-200 transition-all duration-300 hover:border-lime-500 sm:text-lg md:text-xl ` +
             (selectedView.toLowerCase() === choice.toLowerCase()
               ? "border-lime-500"
               : "border-transparent")
@@ -21,12 +21,12 @@ function Choises() {
           {choice}
 
           {choice === "favorites" && favorites.length > 0 && (
-            <span className="ml-2 text-lime-900 bg-lime-500 border border-lime-900 rounded-full flex items-center justify-center h-5 w-5 text-sm mt-0.5 font-bold">
+            <span className="ml-2 flex h-5 w-5 items-center justify-center rounded-full border border-lime-900 bg-lime-500 text-[11px] font-bold text-lime-900 sm:text-xs">
               {favorites.length}
             </span>
           )}
           {choice === "log" && logViewDate.length > 0 && (
-            <span className="ml-2 text-lime-900 bg-lime-500 border border-lime-900 rounded-full flex items-center justify-center h-5 w-5 text-sm mt-0.5 font-bold">
+            <span className="ml-2 flex h-5 w-5 items-center justify-center rounded-full border border-lime-900 bg-lime-500 text-[11px] font-bold text-lime-900 sm:text-xs">
               {logViewDate.length}
             </span>
           )}

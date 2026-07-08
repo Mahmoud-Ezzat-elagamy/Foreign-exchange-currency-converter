@@ -1,7 +1,6 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaCaretDown, FaCheck } from "react-icons/fa";
 import { useCurrency } from "../contextApi/concurrs";
-import {} from "../contextApi/contextReducer";
 import { validCurrencies } from "../../public/data";
 
 const flageTemplate = (code) => `/flags/${code.toLowerCase()}.webp`;
@@ -9,6 +8,7 @@ const flageTemplate = (code) => `/flags/${code.toLowerCase()}.webp`;
 function SelectCurrency({ direction }) {
   const [isOpen, setIsOpen] = useState(false);
   const { changeSendCurrency, changeReceiveCurrency, state } = useCurrency();
+  const ref = useRef(null);
 
   function toggleDropdown() {
     setIsOpen((isOpen) => !isOpen);
@@ -22,8 +22,25 @@ function SelectCurrency({ direction }) {
     }
   }
 
+  useEffect(() => {
+    function handleClickOutside(event) {
+      console.log("ref.current:", ref.current);
+      console.log("event.target:", event.target);
+      if (ref.current && !ref.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    // Cleanup the event listener when the component unmounts
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="relative">
+    <div className="relative" ref={ref}>
       <div
         onClick={toggleDropdown}
         className="flex items-center gap-3 rounded-2xl border border-white/10 bg-neutral-800/90 px-3 py-2 text-neutral-100 shadow-[0_10px_30px_rgba(0,0,0,0.35)] transition duration-200 hover:border-lime-500/40 hover:bg-neutral-800 cursor-pointer"

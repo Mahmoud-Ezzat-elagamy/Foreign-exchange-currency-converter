@@ -10,29 +10,35 @@ function Statistics() {
   return (
     <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
       <div className="bg-neutral-800 px-4 py-3 rounded-lg flex flex-col gap-2">
-        <p className="text-neutral-400 uppercase tracking-wide scale-x-[1.1]">
+        <p className="text-xs uppercase tracking-wide scale-x-[1.1] text-neutral-400 sm:text-sm">
           open
         </p>{" "}
-        <p className="text-neutral-200 text-xl">{startRate.toFixed(3)}</p>
+        <p className="text-lg text-neutral-200 sm:text-xl">
+          {startRate.toFixed(3)}
+        </p>
       </div>
       <div className="bg-neutral-800 px-4 py-3 rounded-lg flex flex-col gap-2">
-        <p className="text-neutral-400 uppercase tracking-wide scale-x-[1.1]">
+        <p className="text-xs uppercase tracking-wide scale-x-[1.1] text-neutral-400 sm:text-sm">
           last
         </p>{" "}
-        <p className="text-neutral-200 text-xl">{endRate.toFixed(3)}</p>
+        <p className="text-lg text-neutral-200 sm:text-xl">
+          {endRate.toFixed(3)}
+        </p>
       </div>
       <div className="bg-neutral-800 px-4 py-3 rounded-lg flex flex-col gap-2">
-        <p className="text-neutral-400 uppercase tracking-wide scale-x-[1.1]">
+        <p className="text-xs uppercase tracking-wide scale-x-[1.1] text-neutral-400 sm:text-sm">
           Change
         </p>{" "}
-        <p className="text-neutral-200 text-xl">{change.toFixed(3)}</p>
+        <p className="text-lg text-neutral-200 sm:text-xl">
+          {change.toFixed(3)}
+        </p>
       </div>
       <div className="bg-neutral-800 px-4 py-3 rounded-lg flex flex-col gap-2">
-        <p className="text-neutral-400 uppercase tracking-wide scale-x-[1.1]">
+        <p className="text-xs uppercase tracking-wide scale-x-[1.1] text-neutral-400 sm:text-sm">
           % Change
         </p>{" "}
         <p
-          className={`text-neutral-200 text-xl flex items-center gap-2 ${changePercentage >= 0 ? "text-green-500" : "text-red-500"}`}
+          className={`flex items-center gap-2 text-lg ${changePercentage >= 0 ? "text-green-500" : "text-red-500"} sm:text-xl`}
         >
           {changePercentage >= 0 ? (
             <>

@@ -5,8 +5,10 @@ function ValueBox({ direction }) {
   const text = direction === "send" ? "Send" : "Receive";
   const { handleChangeSendAmount, state } = useCurrency();
   return (
-    <div className="bg-neutral-700 rounded-2xl p-5">
-      <p className="uppercase text-neutral-100 tracking-[1px]">{text}</p>
+    <div className="rounded-2xl bg-neutral-700 p-4 sm:p-5">
+      <p className="text-sm uppercase tracking-[1px] text-neutral-100 sm:text-base">
+        {text}
+      </p>
       <div className="flex items-end justify-between">
         <input
           value={
@@ -20,7 +22,7 @@ function ValueBox({ direction }) {
           disabled={direction === "receive"}
           type="text"
           accept="0123456789"
-          className={`bg-transparent text-neutral-100 text-4xl font-bold w-full mt-2 h-20 focus:border-none focus:outline-none disabled:text-lime-500`}
+          className={`mt-2 h-16 w-full bg-transparent text-3xl font-bold text-neutral-100 focus:border-none focus:outline-none disabled:text-lime-500 sm:h-20 sm:text-4xl`}
         />
         <SelectCurrency direction={direction} key={direction} />
       </div>

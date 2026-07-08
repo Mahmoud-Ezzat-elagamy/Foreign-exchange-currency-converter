@@ -1,6 +1,6 @@
 function MainHeader() {
   return (
-    <h3 className="uppercase text-neutral-50 mb-3 scale-y-[1.2] text-[22px] tracking-wide">
+    <h3 className="mb-3 scale-y-[1.2] text-lg uppercase tracking-wide text-neutral-50 sm:text-xl md:text-[22px]">
       Check the rate
     </h3>
   );
