@@ -9,6 +9,13 @@ function SelectCurrency({ direction }) {
   const [isOpen, setIsOpen] = useState(false);
   const { changeSendCurrency, changeReceiveCurrency, state } = useCurrency();
   const ref = useRef(null);
+  const [searchCurrency, setSearchCurrency] = useState(null);
+
+  const filteredCurrencies = searchCurrency
+    ? validCurrencies.filter((currency) =>
+        currency.toLowerCase().includes(searchCurrency.toLowerCase()),
+      )
+    : validCurrencies;
 
   function toggleDropdown() {
     setIsOpen((isOpen) => !isOpen);
@@ -70,9 +77,17 @@ function SelectCurrency({ direction }) {
           <div className="border-b border-white/10 px-4 py-3 text-[12px] uppercase tracking-[0.4em] text-neutral-500">
             Select currency
           </div>
-
+          <div className="px-4 py-3">
+            <input
+              type="text"
+              placeholder="Search currency..."
+              className="bg-transparent text-neutral-100 placeholder:text-neutral-500 focus:outline-none px-3 py-2 w-full border border-white/10 rounded-lg mt-2"
+              value={searchCurrency || ""}
+              onChange={(e) => setSearchCurrency(e.target.value.toUpperCase())}
+            />
+          </div>
           <div className="max-h-80 overflow-auto p-2">
-            {validCurrencies.map((currency) => (
+            {filteredCurrencies.map((currency) => (
               <button
                 key={currency}
                 type="button"
