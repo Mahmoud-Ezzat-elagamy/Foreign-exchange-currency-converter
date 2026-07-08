@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { FaCaretDown, FaCheck } from "react-icons/fa";
+import { FaCaretDown } from "react-icons/fa";
 import { useCurrency } from "../contextApi/concurrs";
 import { validCurrencies } from "../../public/data";
 import { useViewContext } from "../contextApi/currentView";

@@ -11,7 +11,7 @@ function Choises() {
         <li
           key={index}
           className={
-            `flex gap-1 border-b px-4 py-3 text-base uppercase tracking-wider translate-y-px text-neutral-200 transition-all duration-300 hover:border-lime-500 sm:text-lg md:text-xl ` +
+            `flex gap-1 border-b px-4 py-3 text-base uppercase tracking-wider translate-y-px text-neutral-200 transition-all duration-300 hover:border-lime-500 sm:text-lg md:text-xl cursor-pointer` +
             (selectedView.toLowerCase() === choice.toLowerCase()
               ? "border-lime-500"
               : "border-transparent")
